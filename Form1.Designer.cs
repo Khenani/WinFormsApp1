@@ -75,7 +75,7 @@
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             ResumeLayout(false);
         }
-
+    
         #endregion
 
         private Button button1;
