@@ -1,87 +1,110 @@
+🛡️ Cybersecurity Awareness Chatbot (Part 3)
+
+Developer: Khensani
+
+Course: Programming 2A
+
+Framework: C# Windows Forms (.NET)
+
+Database: MySQL (MySqlConnector)
+
+📖 Project Overview
+
+The Cybersecurity Awareness Chatbot is a desktop Graphical User Interface (GUI) application built in C# using Visual Studio 2022. Designed to educate and assist users in staying safe online, the application combines conversational Natural Language Processing (NLP), persistent MySQL task management, an interactive cybersecurity quiz mini-game, and a live activity logger across a clean multi-tab layout.
+
+✨ Key Features
+
+💬 Conversational Cybersecurity Assistant (Chat Tab):
+
+Audio & Visual Greeting: Plays an automated voice greeting (greetings.wav) and displays the application logo (logo.png) on launch.
+
+Memory & Personalization: Remembers the user's name and preferred cybersecurity topics throughout the session.
+
+Sentiment & Fuzzy Matching: Recognizes emotional cues (e.g., worried, anxious) to offer reassuring advice, and handles minor spelling variations using fuzzy string matching.
+
+NLP Intent & Date Parsing: Automatically detects reminders and tasks typed in natural language and schedules them in the database.
+
+📋 MySQL Task Assistant (Task Assistant Tab):
+
+Full CRUD (Create, Read, Update, Delete) integration with a local MySQL database.
+
+Allows users to create cybersecurity tasks with titles, descriptions, and reminder dates using a date picker, mark tasks as completed, and delete old entries.
+
+🧠 Cybersecurity Awareness Quiz (Quiz Tab):
+
+Interactive multiple-choice mini-game covering password safety, phishing, scams, and safe browsing.
+
+Tracks real-time scores and provides immediate educational explanations after every question.
+
+📊 Live Activity Log (Activity Log Tab):
+
+Tracks and displays a chronological history of recent user actions (e.g., tasks added, reminders scheduled, quiz attempts, and chat interactions).
+
+Accessible both via the dedicated tab and by asking the chatbot "What have you done?" or "Activity log".
+
+📂 Project Architecture
+
+WinFormsApp1/
+├── Data/
+│   ├── DbConfig.cs            # MySQL database connection configuration
+│   └── TaskRepo.cs            # CRUD database operations using MySqlConnector
+├── Database/
+│   └── setup.sql              # SQL script to initialize database and tasks table
+├── Models/
+│   └── TaskItem.cs            # Data model representing a cybersecurity task
+├── Services/
+│   ├── ActivityLogger1.cs     # Tracks and retrieves recent user activities
+│   ├── ChatBotEngine.cs       # Core response routing and conversation engine
+│   ├── FuzzyMatcher.cs        # Keyword similarity and typo tolerance logic
+│   ├── NlpServices.cs         # Intent recognition and keyword extraction
+│   ├── QuizServices.cs        # Quiz questions, scoring, and answer validation
+│   ├── ReminderParser.cs      # Extracts dates from natural language inputs
+│   └── TaskDescription.cs     # Formats and structures task descriptions
+├── images/
+│   └── logo.png               # Application branding logo
+├── voice/
+│   └── greetings.wav          # Startup welcome audio clip
+├── Form1.cs                   # Main UI logic and event handlers
+└── Form1.Designer.cs          # Windows Forms GUI layout and controls
 
 
+⚙️ Setup & Installation
 
-# WinFormsApp1
+1. Prerequisites
 
-## Overview
+Visual Studio 2022 with the .NET desktop development workload.
 
-WinFormsApp1 is a simple Windows Forms chatbot-style application that helps users learn basic cybersecurity tips, including topics such as passwords, phishing/scams, and privacy. The user interface is implemented in `Form1.cs`, and the project targets .NET 8 and C# 12.
+MySQL Server (e.g., MySQL Workbench, XAMPP, or WAMP).
 
-## Prerequisites
+NuGet Package: MySqlConnector.
 
-Before you begin, ensure you have the following installed:
+2. Database Configuration
 
-- Visual Studio 2022 (or later) with the .NET desktop development workload
-- .NET 8 SDK
+Open your MySQL client and execute the following SQL script to create the database and table:
 
-## Setup
+CREATE DATABASE IF NOT EXISTS cyberbot_db;
+USE cyberbot_db;
 
-To set up the project, follow these steps:
-
-1. Clone the repository.
-2. Open the solution in Visual Studio: `WinFormsApp1.sln`.
-3. Restore NuGet packages (Visual Studio will usually do this automatically).
-4. Ensure the following resource folders and files are present in the project directory:
-   - `voice/greetings.wav` (greeting sound played on startup)
-   - `images/logo.png` (logo shown in the main form)
-
-If those files are missing, the app will log a debug message but will continue to run.
-
-## Build & Run
-
-To build and run the application:
-
-- Press F5 (Debug) or Ctrl+F5 (Run without debugging) in Visual Studio.
-- The app opens the main form, which automatically plays the greeting (if present) and displays the logo.
-
-## Usage
-
-Interacting with the chatbot is straightforward:
-
-- Type your message into the input box and press Enter or click the send button.
-- The chatbot recognizes keywords like `password`, `scam`, and `privacy`, providing relevant tips.
-- You can say "my name is <YourName>" to let the app remember your name for personalized replies.
-- To receive follow-up suggestions on the last topic discussed, ask for "give me another tip" or similar phrases.
-
-## Project Structure (key files)
-
-The key files in the project are as follows:
-
-- `Form1.cs` - Contains the main UI logic and chatbot processing.
-- `Form1.Designer.cs` - Designer-generated code for UI layout.
-- `Form1.resx` - Resource file for the form.
-
-## Project Standards
-
-This repository enforces formatting and contribution rules through an `.editorconfig` and `CONTRIBUTING.md`. If these files are missing, they will be added. Contributors must follow the rules defined in these files for naming, formatting, commit message style, and pull request structure. Typical expectations include:
-
-- Consistent indentation and naming conventions as defined in `.editorconfig`.
-- Unit tests and clear commit messages for non-trivial changes.
-- A short, descriptive PR template described in `CONTRIBUTING.md`.
-
-Please follow these standards when making changes or opening pull requests.
-
-## Coding Standards & Contribution
-
-This project enforces team standards via an `.editorconfig` and a `CONTRIBUTING.md`. These files will be created if missing and must be followed by contributors. Adhere to the rules in those files for naming, formatting, and commit conventions.
-
-If you plan to contribute, please follow these steps:
-
-1. Fork the repository.
-2. Create a feature branch.
-3. Follow the rules outlined in `.editorconfig` and `CONTRIBUTING.md`.
-4. Open a pull request describing your changes.
-
-## Troubleshooting
-
-If you encounter issues, consider the following troubleshooting tips:
-
-- If audio does not play, confirm that `voice/greetings.wav` exists and is a valid WAV file.
-- If the logo does not appear, ensure that `images/logo.png` exists and is a valid PNG.
-- Check the Output/Debug window in Visual Studio for logged messages from `PlayGreeting` and `DisplayLogo`.
-
-## License
-
-This project is provided under the MIT License. See `LICENSE` for details.
+CREATE TABLE IF NOT EXISTS tasks (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    title VARCHAR(255) NOT NULL,
+    description TEXT,
+    reminder_date DATETIME NULL,
+    is_completed BOOLEAN DEFAULT FALSE,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
 
 
+Open Data/DbConfig.cs in your project and verify that your server credentials match your local MySQL setup.
+
+3. Running the Application
+
+Open WinFormsApp1.sln in Visual Studio 2022.
+
+Restore NuGet packages if prompted (MySqlConnector).
+
+Press Start (F5) to build and run the application.
+
+🎥 Video Demonstration
+
+YouTube Unlisted Walkthrough: [Insert your unlisted YouTube link here before submission]
