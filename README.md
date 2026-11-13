@@ -1,20 +1,12 @@
-🛡️ Cybersecurity Awareness Chatbot (Part 3)
+Cybersecurity Awareness Chatbot (Part 3)
 
-Developer: Khensani
-
-Course: Programming 2A
-
-Framework: C# Windows Forms (.NET)
-
-Database: MySQL (MySqlConnector)
-
-📖 Project Overview
+ Project Overview
 
 The Cybersecurity Awareness Chatbot is a desktop Graphical User Interface (GUI) application built in C# using Visual Studio 2022. Designed to educate and assist users in staying safe online, the application combines conversational Natural Language Processing (NLP), persistent MySQL task management, an interactive cybersecurity quiz mini-game, and a live activity logger across a clean multi-tab layout.
 
-✨ Key Features
+Key Features
 
-💬 Conversational Cybersecurity Assistant (Chat Tab):
+Conversational Cybersecurity Assistant (Chat Tab):
 
 Audio & Visual Greeting: Plays an automated voice greeting (greetings.wav) and displays the application logo (logo.png) on launch.
 
@@ -24,25 +16,24 @@ Sentiment & Fuzzy Matching: Recognizes emotional cues (e.g., worried, anxious) t
 
 NLP Intent & Date Parsing: Automatically detects reminders and tasks typed in natural language and schedules them in the database.
 
-📋 MySQL Task Assistant (Task Assistant Tab):
+ MySQL Task Assistant (Task Assistant Tab):
 
 Full CRUD (Create, Read, Update, Delete) integration with a local MySQL database.
 
 Allows users to create cybersecurity tasks with titles, descriptions, and reminder dates using a date picker, mark tasks as completed, and delete old entries.
 
-🧠 Cybersecurity Awareness Quiz (Quiz Tab):
+Cybersecurity Awareness Quiz (Quiz Tab):
 
 Interactive multiple-choice mini-game covering password safety, phishing, scams, and safe browsing.
 
 Tracks real-time scores and provides immediate educational explanations after every question.
-
-📊 Live Activity Log (Activity Log Tab):
+ Live Activity Log (Activity Log Tab):
 
 Tracks and displays a chronological history of recent user actions (e.g., tasks added, reminders scheduled, quiz attempts, and chat interactions).
 
 Accessible both via the dedicated tab and by asking the chatbot "What have you done?" or "Activity log".
 
-📂 Project Architecture
+ Project Architecture
 
 WinFormsApp1/
 ├── Data/
@@ -105,6 +96,4 @@ Restore NuGet packages if prompted (MySqlConnector).
 
 Press Start (F5) to build and run the application.
 
-🎥 Video Demonstration
-
-YouTube Unlisted Walkthrough: [Insert your unlisted YouTube link here before submission]
+isted YouTube link here before submission]
